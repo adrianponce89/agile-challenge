@@ -3,6 +3,8 @@ import { View, Image } from 'react-native';
 import { PictureProps } from '../../types';
 import styles from './styles';
 import DetailsFooter from './components/DetailsFooter';
+import ImageZoom from 'react-native-image-pan-zoom';
+import { WINDOW_WIDTH, WINDOW_HEIGHT } from '../../constants/platform';
 
 interface DetailsViewProps {
   imageUrl: string;
@@ -20,7 +22,14 @@ const DetailsView = ({
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: imageUrl }} style={styles.imageStyle} />
+        <ImageZoom
+          cropWidth={WINDOW_WIDTH}
+          cropHeight={WINDOW_HEIGHT}
+          imageWidth={WINDOW_WIDTH * 0.9}
+          imageHeight={WINDOW_HEIGHT * 0.9}
+        >
+          <Image source={{ uri: imageUrl }} style={styles.imageStyle} />
+        </ImageZoom>
       </View>
       <DetailsFooter
         pictureDetails={picture}
