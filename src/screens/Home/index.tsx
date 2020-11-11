@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeProps } from '../../types';
 import { getPictures } from '../../redux/slices/homeSlice';
 import { RootState } from '../../redux/store';
-import ListItem from './components/ListItem';
-import { PictureProps } from '../../types';
-import styles from './styles';
+import HomeView from './layout';
 
-const keyExtractor = (item: PictureProps, page: number) =>
-  item.id.toString() + page;
-
-const Home = ({ navigation }: HomeProps) => {
+const HomeContainer = ({ navigation }: HomeProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPictures());
@@ -30,33 +24,16 @@ const Home = ({ navigation }: HomeProps) => {
     });
   };
 
-  const _renderItem = (picture: { item: PictureProps }) => {
-    const imageURL = picture.item.cropped_picture;
-    const imageId = picture.item.id;
-    return (
-      <ListItem
-        imageUrl={imageURL}
-        imageId={imageId}
-        openPicture={onOpenPicture}
-      />
-    );
-  };
-
   return (
-    <View style={styles.page}>
-      <FlatList
-        removeClippedSubviews
-        refreshing={isLoading}
-        initialNumToRender={20}
-        data={pictures}
-        onRefresh={onRefresh}
-        numColumns={2}
-        renderItem={_renderItem}
-        keyExtractor={(item) => keyExtractor(item, page)}
-        onEndReached={onLoadNext}
-      />
-    </View>
+    <HomeView
+      pictures={pictures}
+      page={page}
+      isLoading={isLoading}
+      onLoadNext={onLoadNext}
+      onRefresh={onRefresh}
+      onOpenPicture={onOpenPicture}
+    />
   );
 };
 
-export default Home;
+export default HomeContainer;
