@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Share } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailsProps } from '../../types';
 import { RootState } from '../../redux/store';
@@ -18,7 +19,15 @@ const Details = ({ route }: DetailsProps) => {
   const imageUrl = picture?.full_picture || pictureDetails!.cropped_picture;
 
   const handleApplyFilter = () => {};
-  const handleShare = () => {};
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: picture!.full_picture!,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <DetailsView
