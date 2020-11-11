@@ -1,21 +1,27 @@
 import { createSlice, Dispatch } from '@reduxjs/toolkit';
 import picturesService from '../../services/picturesService';
+import { PictureProps } from '../../types';
+
+type DetailsState = {
+  isLoading: boolean;
+  picture?: PictureProps;
+  errorMessage?: string;
+};
+
+const initialState: DetailsState = {
+  isLoading: false,
+};
 
 const detailsSlice = createSlice({
   name: 'details',
-  initialState: {
-    isLoading: false,
-    hiResPictures: [],
-    errorMessage: null,
-  },
+  initialState,
   reducers: {
     getPictureDetailsRequest: (state) => {
       state.isLoading = true;
-      state.errorMessage = null;
     },
     getPictureDetailsSuccess: (state, action) => {
       state.isLoading = false;
-      state.hiResPictures = action.payload;
+      state.picture = action.payload;
     },
     getPictureDetailsFailure: (state, action) => {
       state.isLoading = false;
@@ -30,10 +36,10 @@ export const {
   getPictureDetailsFailure,
 } = detailsSlice.actions;
 
-export function getPictureDetails() {
+export function getPictureDetails(id: number) {
   return (dispatch: Dispatch) => {
     dispatch(getPictureDetailsRequest());
-    picturesService.getPictureDetails().then(
+    picturesService.getPictureDetails(id).then(
       (hiResPictures) => {
         dispatch(getPictureDetailsSuccess(hiResPictures));
       },

@@ -5,14 +5,11 @@ import { HomeProps } from '../../types';
 import { getPictures } from '../../redux/slices/homeSlice';
 import { RootState } from '../../redux/store';
 import ListItem from './components/ListItem';
+import { PictureProps } from '../../types';
 import styles from './styles';
 
-interface Item {
-  cropped_picture: string;
-  id: number;
-}
-
-const keyExtractor = (item: Item, page: number) => item.id.toString() + page;
+const keyExtractor = (item: PictureProps, page: number) =>
+  item.id.toString() + page;
 
 const Home = ({ navigation }: HomeProps) => {
   const dispatch = useDispatch();
@@ -33,7 +30,7 @@ const Home = ({ navigation }: HomeProps) => {
     });
   };
 
-  const _renderItem = (picture: { item: Item }) => {
+  const _renderItem = (picture: { item: PictureProps }) => {
     const imageURL = picture.item.cropped_picture;
     const imageId = picture.item.id;
     return (
