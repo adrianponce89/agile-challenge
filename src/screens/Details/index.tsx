@@ -16,7 +16,7 @@ const Details = ({ route }: DetailsProps) => {
 
   const { picture } = useSelector((state: RootState) => state.details);
 
-  const imageUrl = picture?.full_picture || pictureDetails!.cropped_picture;
+  const imageUrl = picture?.full_picture! || pictureDetails!.cropped_picture;
 
   const handleApplyFilter = () => {};
   const handleShare = async () => {
