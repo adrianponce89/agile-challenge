@@ -19,6 +19,11 @@ const windowDimensions = Dimensions.get('window');
 export const WINDOW_HEIGHT = windowDimensions.height;
 export const WINDOW_WIDTH = windowDimensions.width;
 
+export const WINDOW_MIN =
+  WINDOW_HEIGHT < WINDOW_WIDTH ? WINDOW_HEIGHT : WINDOW_WIDTH;
+export const WINDOW_MAX =
+  WINDOW_HEIGHT > WINDOW_WIDTH ? WINDOW_HEIGHT : WINDOW_WIDTH;
+
 export const VIEWPORT_HEIGHT =
   WINDOW_HEIGHT -
   TABBAR_HEIGHT -

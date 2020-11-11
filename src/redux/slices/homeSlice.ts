@@ -1,22 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Dispatch } from '@reduxjs/toolkit';
 import picturesService from '../../services/picturesService';
+import { PictureProps } from '../../types';
+
+type HomeState = {
+  page: number;
+  isLoading: boolean;
+  pictures: Array<PictureProps>;
+  errorMessage?: string;
+};
+
+const initialState: HomeState = {
+  page: 0,
+  isLoading: false,
+  pictures: [],
+};
 
 const homeSlice = createSlice({
   name: 'home',
-  initialState: {
-    page: false,
-    isLoading: false,
-    pictures: [],
-    errorMessage: null,
-  },
+  initialState,
   reducers: {
     getPicturesRequest: (state) => {
       state.isLoading = true;
-      state.errorMessage = null;
     },
     getPicturesSuccess: (state, action) => {
       state.isLoading = false;
-      state.pictures = action.payload;
+      const { pictures, page } = action.payload;
+      if (page > state.page) {
+        state.page = page;
+        state.pictures = state.pictures.concat(pictures);
+        console.log('number of pictures::', pictures.length);
+      }
     },
     getPicturesFailure: (state, action) => {
       state.isLoading = false;
@@ -32,7 +45,7 @@ export const {
 } = homeSlice.actions;
 
 export function getPictures() {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch(getPicturesRequest());
     picturesService.getPictures().then(
       (pictures) => {

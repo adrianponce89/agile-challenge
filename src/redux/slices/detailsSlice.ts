@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Dispatch } from '@reduxjs/toolkit';
 import picturesService from '../../services/picturesService';
 
 const detailsSlice = createSlice({
@@ -31,7 +31,7 @@ export const {
 } = detailsSlice.actions;
 
 export function getPictureDetails() {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch(getPictureDetailsRequest());
     picturesService.getPictureDetails().then(
       (hiResPictures) => {

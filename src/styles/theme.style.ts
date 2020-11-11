@@ -1,4 +1,4 @@
-import { REF_RATIO } from '../constants/platform';
+import { REF_RATIO, WINDOW_MIN } from '../constants/platform';
 
 const PureWhite = '#FFF';
 const DarkWhite = '#9FB2BC';
@@ -36,4 +36,5 @@ export default {
   BUTTON_HEIGHT: 60 * REF_RATIO,
   CELL_HEIGHT_SMALL: 40 * REF_RATIO,
   CELL_HEIGHT_MEDIUM: 60 * REF_RATIO,
+  IMAGE_PORTRAIT_SIZE: WINDOW_MIN / 2 - 10 * REF_RATIO,
 };
