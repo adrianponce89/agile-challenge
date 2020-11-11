@@ -19,6 +19,11 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
+    clearPictures: (state) => {
+      state.page = 0;
+      state.isLoading = false;
+      state.pictures = [];
+    },
     getPicturesRequest: (state) => {
       state.isLoading = true;
     },
@@ -39,15 +44,16 @@ const homeSlice = createSlice({
 });
 
 export const {
+  clearPictures,
   getPicturesRequest,
   getPicturesSuccess,
   getPicturesFailure,
 } = homeSlice.actions;
 
-export function getPictures() {
+export function getPictures(page: number) {
   return (dispatch: Dispatch) => {
     dispatch(getPicturesRequest());
-    picturesService.getPictures().then(
+    picturesService.getPictures(page).then(
       (pictures) => {
         dispatch(getPicturesSuccess(pictures));
       },

@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeProps } from '../../types';
-import { getPictures } from '../../redux/slices/homeSlice';
+import { getPictures, clearPictures } from '../../redux/slices/homeSlice';
 import { RootState } from '../../redux/store';
 import HomeView from './layout';
 
 const HomeContainer = ({ navigation }: HomeProps) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPictures());
-  }, []);
 
   const { pictures, page, isLoading } = useSelector(
     (state: RootState) => state.home
   );
+  useEffect(() => {
+    dispatch(getPictures(1));
+  }, []);
 
-  const onLoadNext = () => {};
-  const onRefresh = () => {};
+  const onLoadNext = () => {
+    dispatch(getPictures(page + 1));
+  };
+  const onRefresh = () => {
+    dispatch(clearPictures());
+    dispatch(getPictures(1));
+  };
 
   const onOpenPicture = (imageId: number): void => {
     navigation.navigate('Details', {
