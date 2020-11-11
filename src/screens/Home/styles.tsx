@@ -5,7 +5,7 @@ const styles: any = StyleSheet.create({
   page: {
     flex: 1,
     alignItems: 'stretch',
-    // backgroundColor: 'black',
+    backgroundColor: theme.BACKGROUND_COLOR,
   },
   errorContainer: {
     padding: 30,

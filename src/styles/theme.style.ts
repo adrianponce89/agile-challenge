@@ -11,7 +11,7 @@ const Black = '#000';
 export default {
   PRIMARY_COLOR: ElectricViolet,
   SECONDARY_COLOR: RedCrayola,
-  BACKGROUND_COLOR: PureWhite,
+  BACKGROUND_COLOR: Black,
   FONT_SIZE_XSMALL: 11 * REF_RATIO,
   FONT_SIZE_SMALL: 12 * REF_RATIO,
   FONT_SIZE_MEDIUM: 14 * REF_RATIO,

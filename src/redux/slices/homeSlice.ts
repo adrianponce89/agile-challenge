@@ -33,7 +33,6 @@ const homeSlice = createSlice({
       if (page > state.page) {
         state.page = page;
         state.pictures = state.pictures.concat(pictures);
-        console.log('number of pictures::', pictures.length);
       }
     },
     getPicturesFailure: (state, action) => {
